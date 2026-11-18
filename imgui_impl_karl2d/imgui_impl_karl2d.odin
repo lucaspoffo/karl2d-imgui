@@ -231,8 +231,6 @@ render_draw_data :: proc(draw_data: ^imgui.DrawData) {
     k2.set_scissor_rect(nil)
 }
 
-import "core:fmt"
-
 @private
 render_triangles :: proc(count: u32, index_start: u32, index_buffer: imgui.Vector_DrawIdx, vert_buffer: imgui.Vector_DrawVert, texture_ptr: imgui.TextureID) {
     if count < 3 {
@@ -240,7 +238,6 @@ render_triangles :: proc(count: u32, index_start: u32, index_buffer: imgui.Vecto
     }
 
     texture: k2.Texture = transmute(k2.Texture)texture_ptr
-    // fmt.println(texture)
 
     tex := k2._get_texture_or_error(texture, "Trying to draw invalid texture with handle %v", texture)
     if tex == nil {
@@ -286,7 +283,6 @@ process_events :: proc() {
                 imgui.IO_AddKeyEvent(io, modifier, true)
             }
 
-
             key := u32(e.key)
             if key < 255 {
                 imgui.IO_AddInputCharacter(io, u32(e.key))
@@ -297,7 +293,6 @@ process_events :: proc() {
             if modifier != nil {
                 imgui.IO_AddKeyEvent(io, modifier, false)
             }
-            // if modifier_keys[e.key]
         case k2.Event_Mouse_Button_Went_Down:
             imgui.IO_AddMouseButtonEvent(io, i32(e.button), true)
         case k2.Event_Mouse_Button_Went_Up:
